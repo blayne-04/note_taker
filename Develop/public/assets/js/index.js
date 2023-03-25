@@ -1,3 +1,4 @@
+const uniqid = require('uniqid')
 let noteTitle;
 let noteText;
 let saveNoteBtn;
