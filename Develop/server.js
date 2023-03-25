@@ -42,10 +42,10 @@ app.post('/api/notes', (req, res) => {
                 const newNote = {
                     ...req.body,
 //assigns a unique id for every new note
-                    id: uniqid()
+                    "id": uniqid()
                 }
                 notes.push(newNote)
-//overwrites db with the above content
+//overwrites db with the above data
                 fs.writeFile(dbPath, JSON.stringify(notes, null, 4), (err) => {
                     if (err) {
                         console.error(err);
@@ -58,6 +58,7 @@ app.post('/api/notes', (req, res) => {
             }
         });
 });
+
 app.listen(PORT, () =>
 console.log(`Serving static asset routes at http://localhost:${PORT}!`)
 )
