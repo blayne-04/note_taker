@@ -5,7 +5,7 @@ const dbPath = path.join(__dirname, 'db/db.json');
 const fs = require('fs')
 const uniqid = require('uniqid')
 //port
-const PORT = 3001
+const PORT = process.env.PORT || 3001
 //express()
 const app = express()
 //middleware
