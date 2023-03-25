@@ -25,8 +25,20 @@ app.get('/api/notes', (req, res) => {
 });
 //delete request for http://localhost:3001/api/notes/:id
 app.delete('/api/notes/:id', (req, res) => {
-    console.log(req.body)
-    res.send(req.body)
+    fs.readFile(dbPath, 'utf8', (err, data) => {
+        if(err){
+            console.error(err);
+            res.status(500).send("Invalid ID/ No ID presented")
+        }else{
+            let notes = JSON.parse(data)
+            const noteIndex = notes.findIndex(note => note.id === req.params.id)
+            notes.splice(noteIndex, 1)
+            fs.writeFile(dbPath, JSON.stringify(notes, null, 4), (err) => {
+                if (err) throw err;
+                res.status(200).send('Note Deleted')
+            })
+        }
+    })
 })
 //post request for /api/notes
 app.post('/api/notes', (req, res) => {
